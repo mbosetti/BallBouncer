@@ -76,8 +76,11 @@ func _launch_projectiles():
 func _on_projectile_enter_dead_zone(body):
 	var projectile = body as Projectile
 	if projectile:
-		projectile.hit.disconnect(_on_projectile_hit)
-		projectile.queue_free()
+		projectile.gravity_scale = 0
+		projectile.linear_velocity = Vector2.ZERO
+		projectile.visible = false
+		# projectile.hit.disconnect(_on_projectile_hit)
+		# projectile.queue_free()
 		_on_projectile_deleted()
 
 func _on_player_dead_zone_body_entered(body):

@@ -22,9 +22,9 @@ class Params:
 
 signal projectile_launched(projectile: Projectile)
 
-var _show_line: bool = false
-
+var _projectiles: Array[Projectile] = []
 var projectile_scene = preload("res://scenes/game/projectile.tscn")
+var _show_line: bool = false
 
 func _process(delta: float) -> void:
 	if _show_line:
@@ -41,19 +41,32 @@ func hide_line() -> void:
 
 func launch_multiple(params: Params) -> Array[Projectile]:
 	var projectiles: Array[Projectile] = []
+	var projectile
 	for i in range(params.count):
-		var projectile = _create_projectile(params.mouse_pos)
+		# Create a new projectile if needed
+		if i >= projectiles.size():
+			projectile = _create_projectile()
+			_projectiles.append(projectile)
+
+		# Reuse an existing projectile
+		projectile = _projectiles[i]
 		projectiles.append(projectile)
 		params.parent.add_child(projectile)
+		
+		# Launch the projectile
+		projectile.global_position = self.global_position
+		projectile.linear_velocity = Vector2(params.mouse_pos - self.global_position).normalized() * launch_speed
 		projectile.gravity_scale = 0
-		projectile.connect("hit", params.hit_callback)
+		projectile.visible = true
+
+		if !projectile.is_connected("hit", params.hit_callback):
+			projectile.connect("hit", params.hit_callback)
+
 		emit_signal("projectile_launched", projectile)
 		AudioManager.play(launch_sound)
 		await get_tree().create_timer(launch_delay).timeout
 	return projectiles
 
-func _create_projectile(mouse_pos: Vector2) -> Projectile:
+func _create_projectile() -> Projectile:
 	var projectile = projectile_scene.instantiate() as Projectile
-	projectile.global_position = self.global_position
-	projectile.linear_velocity = Vector2(mouse_pos - self.global_position).normalized() * launch_speed
 	return projectile
