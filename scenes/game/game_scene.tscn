@@ -1,0 +1,244 @@
+[gd_scene load_steps=31 format=3 uid="uid://btjqiiwtaijyn"]
+
+[ext_resource type="Script" path="res://scripts/BallBouncer.gd" id="1_642hy"]
+[ext_resource type="PackedScene" uid="uid://chg3qjhehf1ar" path="res://scenes/ui/main_ui.tscn" id="2_4gw5c"]
+[ext_resource type="Script" path="res://scripts/camera/default_camera.gd" id="2_e0vir"]
+[ext_resource type="PackedScene" uid="uid://chx5j14qplkjb" path="res://scenes/util/shake.tscn" id="3_1ed2t"]
+[ext_resource type="PackedScene" uid="uid://yisy7ekslkrk" path="res://scenes/game/game_over_screen.tscn" id="3_vb4t7"]
+[ext_resource type="Texture2D" uid="uid://bp50c1qm3fkn7" path="res://assets/background.svg" id="4_8wwbn"]
+[ext_resource type="Shader" path="res://scenes/game_scene.gdshader" id="5_7dnnh"]
+[ext_resource type="Texture2D" uid="uid://cwd2homv46oqg" path="res://assets/square_over_square.png" id="6_yhgm4"]
+[ext_resource type="PackedScene" uid="uid://brphdiiw2w7qf" path="res://scenes/game/projectile_launcher.tscn" id="7_35dpy"]
+[ext_resource type="Script" path="res://scripts/CollidableObjectSpawner.gd" id="8_lmsiy"]
+[ext_resource type="Texture2D" uid="uid://dqd7vkip8g1vo" path="res://assets/dashed.svg" id="8_q0gkl"]
+[ext_resource type="PackedScene" uid="uid://ds4qsa78i01ig" path="res://scenes/types/circle.tscn" id="9_flstf"]
+[ext_resource type="PackedScene" uid="uid://snawpiwia6ch" path="res://scenes/types/square.tscn" id="10_gfmyq"]
+[ext_resource type="PackedScene" uid="uid://dh1uukhd20wso" path="res://scenes/types/triangle.tscn" id="11_4gxdp"]
+[ext_resource type="AudioStream" uid="uid://c1pcvjhb0ddm" path="res://assets/music/background_music.mp3" id="12_82ob4"]
+[ext_resource type="Texture2D" uid="uid://3x7osmtyh73d" path="res://assets/bottom_wave.svg" id="14_em56t"]
+[ext_resource type="Script" path="res://scripts/state/state_machine.gd" id="16_qbstw"]
+[ext_resource type="Script" path="res://scripts/state/game/round_start_state.gd" id="18_n7oe4"]
+[ext_resource type="Script" path="res://scripts/state/game/round_state.gd" id="19_vlimi"]
+[ext_resource type="Script" path="res://scripts/state/game/round_end_state.gd" id="19_wbeok"]
+[ext_resource type="Script" path="res://scripts/state/game/game_loading_state.gd" id="20_ufwnk"]
+[ext_resource type="Script" path="res://scripts/state/game/game_over_state.gd" id="21_2uc7c"]
+[ext_resource type="Script" path="res://scripts/state/game/new_game_state.gd" id="21_m8cei"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_k4pnw"]
+shader = ExtResource("5_7dnnh")
+shader_parameter/scroll_speed = Vector2(0.2, -0.125)
+shader_parameter/color = Vector4(1, 1, 1, 0.145)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_slvga"]
+size = Vector2(20, 790)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_q0fbp"]
+size = Vector2(432, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ome2t"]
+size = Vector2(414, 20)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_c2mjr"]
+shader = ExtResource("5_7dnnh")
+shader_parameter/scroll_speed = Vector2(-0.2, 0)
+shader_parameter/color = Vector4(1, 0, 0, 0.5)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_d080h"]
+shader = ExtResource("5_7dnnh")
+shader_parameter/scroll_speed = Vector2(-0.33, 0)
+shader_parameter/color = Vector4(1, 1, 1, 0.645)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_g7qq0"]
+shader = ExtResource("5_7dnnh")
+shader_parameter/scroll_speed = Vector2(1, 0)
+shader_parameter/color = Vector4(0, 0, 0, 0.415)
+
+[node name="GameScene" type="Node2D" groups=["Game"]]
+script = ExtResource("1_642hy")
+
+[node name="UI" parent="." instance=ExtResource("2_4gw5c")]
+
+[node name="GameOverScreen" parent="UI" instance=ExtResource("3_vb4t7")]
+visible = false
+
+[node name="Camera2D" type="Camera2D" parent="."]
+script = ExtResource("2_e0vir")
+
+[node name="Shake" parent="Camera2D" instance=ExtResource("3_1ed2t")]
+
+[node name="Background" type="Node2D" parent="."]
+
+[node name="Solid" type="Sprite2D" parent="Background"]
+modulate = Color(0.329412, 0.160784, 0.729412, 1)
+texture = ExtResource("4_8wwbn")
+
+[node name="ScrollingOverlay" type="Sprite2D" parent="Background"]
+modulate = Color(0.176471, 0.176471, 0.176471, 1)
+texture_repeat = 2
+material = SubResource("ShaderMaterial_k4pnw")
+texture = ExtResource("6_yhgm4")
+region_enabled = true
+region_rect = Rect2(-701, -1145, 854, 1431)
+
+[node name="Objects" type="Node2D" parent="."]
+
+[node name="World" type="Node2D" parent="."]
+
+[node name="Walls" type="Node2D" parent="World"]
+
+[node name="Left" type="StaticBody2D" parent="World/Walls"]
+position = Vector2(-156, 0)
+scale = Vector2(1.064, 2)
+collision_layer = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/Walls/Left"]
+position = Vector2(-217, 8)
+scale = Vector2(2.5, 0.962)
+shape = SubResource("RectangleShape2D_slvga")
+
+[node name="Right" type="StaticBody2D" parent="World/Walls"]
+position = Vector2(124, 0)
+scale = Vector2(1.042, 2)
+collision_layer = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/Walls/Right"]
+position = Vector2(247, 0)
+scale = Vector2(2.5, 0.962)
+shape = SubResource("RectangleShape2D_slvga")
+
+[node name="Top" type="StaticBody2D" parent="World/Walls"]
+position = Vector2(0, -326)
+collision_layer = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/Walls/Top"]
+position = Vector2(1, -333)
+scale = Vector2(2, 2)
+shape = SubResource("RectangleShape2D_q0fbp")
+
+[node name="DeadZone" type="Area2D" parent="World"]
+position = Vector2(0, 670)
+scale = Vector2(1.96, 5)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/DeadZone"]
+shape = SubResource("RectangleShape2D_ome2t")
+
+[node name="PlayerDeadZone" type="Area2D" parent="World"]
+position = Vector2(-1, -479)
+collision_layer = 8
+collision_mask = 7
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/PlayerDeadZone"]
+scale = Vector2(2, 2)
+shape = SubResource("RectangleShape2D_ome2t")
+
+[node name="Line2D" type="Line2D" parent="World/PlayerDeadZone"]
+texture_repeat = 2
+material = SubResource("ShaderMaterial_c2mjr")
+points = PackedVector2Array(-800, 0, 800, 0)
+width = 20.0
+default_color = Color(1, 0, 0, 0.439216)
+texture = ExtResource("8_q0gkl")
+texture_mode = 1
+
+[node name="ProjectileLauncher" parent="." instance=ExtResource("7_35dpy")]
+position = Vector2(0, -619)
+launch_speed = 1000.0
+launch_sound = "res://assets/sfx/launch.mp3"
+
+[node name="CollidableObjectSpawner" type="Node2D" parent="." node_paths=PackedStringArray("spawn_parent")]
+script = ExtResource("8_lmsiy")
+spawn_count_min = 2
+spawn_count_max = 5
+spawnable_objects = Array[PackedScene]([ExtResource("9_flstf"), ExtResource("10_gfmyq"), ExtResource("11_4gxdp")])
+spawn_parent = NodePath("../Objects")
+
+[node name="spawn_location_1" type="Node2D" parent="CollidableObjectSpawner"]
+position = Vector2(-300, 512)
+
+[node name="Marker2D" type="Marker2D" parent="CollidableObjectSpawner/spawn_location_1"]
+
+[node name="spawn_location_2" type="Node2D" parent="CollidableObjectSpawner"]
+position = Vector2(-230, 512)
+
+[node name="Marker2D" type="Marker2D" parent="CollidableObjectSpawner/spawn_location_2"]
+
+[node name="spawn_location_3" type="Node2D" parent="CollidableObjectSpawner"]
+position = Vector2(-150, 512)
+
+[node name="Marker2D" type="Marker2D" parent="CollidableObjectSpawner/spawn_location_3"]
+
+[node name="spawn_location_4" type="Node2D" parent="CollidableObjectSpawner"]
+position = Vector2(-70, 512)
+
+[node name="Marker2D" type="Marker2D" parent="CollidableObjectSpawner/spawn_location_4"]
+
+[node name="spawn_location_5" type="Node2D" parent="CollidableObjectSpawner"]
+position = Vector2(0, 512)
+
+[node name="Marker2D" type="Marker2D" parent="CollidableObjectSpawner/spawn_location_5"]
+
+[node name="spawn_location_6" type="Node2D" parent="CollidableObjectSpawner"]
+position = Vector2(72, 512)
+
+[node name="Marker2D" type="Marker2D" parent="CollidableObjectSpawner/spawn_location_6"]
+
+[node name="spawn_location_7" type="Node2D" parent="CollidableObjectSpawner"]
+position = Vector2(152, 512)
+
+[node name="Marker2D" type="Marker2D" parent="CollidableObjectSpawner/spawn_location_7"]
+
+[node name="spawn_location_8" type="Node2D" parent="CollidableObjectSpawner"]
+position = Vector2(232, 512)
+
+[node name="Marker2D" type="Marker2D" parent="CollidableObjectSpawner/spawn_location_8"]
+
+[node name="spawn_location_9" type="Node2D" parent="CollidableObjectSpawner"]
+position = Vector2(302, 512)
+
+[node name="Marker2D" type="Marker2D" parent="CollidableObjectSpawner/spawn_location_9"]
+
+[node name="Music" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("12_82ob4")
+
+[node name="Bottom" type="Node2D" parent="."]
+position = Vector2(0, 625)
+
+[node name="BottomWave" type="Sprite2D" parent="Bottom"]
+texture_repeat = 2
+material = SubResource("ShaderMaterial_d080h")
+texture = ExtResource("14_em56t")
+region_enabled = true
+region_rect = Rect2(-699, 0, 1032, 64)
+
+[node name="BottomWave2" type="Sprite2D" parent="Bottom"]
+texture_repeat = 2
+material = SubResource("ShaderMaterial_g7qq0")
+position = Vector2(0, -17)
+texture = ExtResource("14_em56t")
+region_enabled = true
+region_rect = Rect2(-699, 0, 1032, 64)
+
+[node name="State Machine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
+script = ExtResource("16_qbstw")
+initial_state = NodePath("Game_Loading")
+logging = true
+
+[node name="Round_Start" type="Node" parent="State Machine"]
+script = ExtResource("18_n7oe4")
+
+[node name="Round" type="Node" parent="State Machine"]
+script = ExtResource("19_vlimi")
+
+[node name="Round_End" type="Node" parent="State Machine"]
+script = ExtResource("19_wbeok")
+
+[node name="Game_Loading" type="Node" parent="State Machine"]
+script = ExtResource("20_ufwnk")
+
+[node name="Game_Over" type="Node" parent="State Machine"]
+script = ExtResource("21_2uc7c")
+
+[node name="New_Game" type="Node" parent="State Machine"]
+script = ExtResource("21_m8cei")
+
+[connection signal="body_entered" from="World/PlayerDeadZone" to="." method="_on_player_dead_zone_body_entered"]

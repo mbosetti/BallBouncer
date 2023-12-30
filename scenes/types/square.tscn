@@ -1,0 +1,21 @@
+[gd_scene load_steps=5 format=3 uid="uid://snawpiwia6ch"]
+
+[ext_resource type="PackedScene" uid="uid://dv0q7qrn7wn4s" path="res://scenes/types/collidable_object_base.tscn" id="1_ptrvq"]
+[ext_resource type="Texture2D" uid="uid://bwrm1q2f7q7xo" path="res://assets/types/square.svg" id="2_aen15"]
+[ext_resource type="Texture2D" uid="uid://deix1r2i6xdiw" path="res://assets/square_light.png" id="3_f0qo0"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_40iwu"]
+size = Vector2(52, 52)
+
+[node name="CollidableObjectBase" instance=ExtResource("1_ptrvq")]
+
+[node name="Sprite" parent="." index="1"]
+texture = ExtResource("2_aen15")
+
+[node name="PointLight2D" type="PointLight2D" parent="Sprite" index="0"]
+z_index = -1
+scale = Vector2(1.38351, 1.38351)
+texture = ExtResource("3_f0qo0")
+
+[node name="CollisionShape2D" parent="." index="2"]
+shape = SubResource("RectangleShape2D_40iwu")

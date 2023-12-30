@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://dh1uukhd20wso"]
+
+[ext_resource type="PackedScene" uid="uid://dv0q7qrn7wn4s" path="res://scenes/types/collidable_object_base.tscn" id="1_p5hm0"]
+[ext_resource type="Texture2D" uid="uid://bs4nsmd00ulah" path="res://assets/triangle_light.png" id="2_0gaxc"]
+
+[sub_resource type="ConvexPolygonShape2D" id="ConvexPolygonShape2D_26pun"]
+points = PackedVector2Array(-25, 25, 0, -25, 25, 25)
+
+[node name="Triangle" instance=ExtResource("1_p5hm0")]
+
+[node name="PointLight2D" type="PointLight2D" parent="Sprite" index="0"]
+z_index = -1
+scale = Vector2(0.66558, 0.700487)
+texture = ExtResource("2_0gaxc")
+
+[node name="CollisionShape2D" parent="." index="2"]
+shape = SubResource("ConvexPolygonShape2D_26pun")
+
+[node name="Label" parent="." index="3"]
+offset_left = -63.0
+offset_top = -8.0
+offset_right = 65.0
+offset_bottom = 34.0

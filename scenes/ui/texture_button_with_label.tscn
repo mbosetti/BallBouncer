@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://ce4ala161m5vr"]
+
+[ext_resource type="Script" path="res://scripts/ui/button/texture_button_with_label.gd" id="1_f1hde"]
+
+[node name="TextureButtonWithLabel" type="TextureButton"]
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_f1hde")
+text = null

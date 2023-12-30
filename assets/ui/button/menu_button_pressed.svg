@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="256"
+   height="64"
+   viewBox="0 0 67.733332 16.933334"
+   version="1.1"
+   id="svg1112"
+   inkscape:version="1.1.1 (3bf5ae0d25, 2021-09-20)"
+   sodipodi:docname="menu_button_pressed.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview1114"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:document-units="mm"
+     showgrid="false"
+     units="px"
+     inkscape:zoom="4.3994184"
+     inkscape:cx="136.15436"
+     inkscape:cy="83.64742"
+     inkscape:window-width="2560"
+     inkscape:window-height="1346"
+     inkscape:window-x="-11"
+     inkscape:window-y="-11"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1" />
+  <defs
+     id="defs1109">
+    <linearGradient
+       inkscape:collect="always"
+       id="linearGradient1210">
+      <stop
+         style="stop-color:#000000;stop-opacity:1;"
+         offset="0"
+         id="stop1206" />
+      <stop
+         style="stop-color:#000000;stop-opacity:0;"
+         offset="1"
+         id="stop1208" />
+    </linearGradient>
+    <radialGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient1210"
+       id="radialGradient1212"
+       cx="33.866665"
+       cy="8.4666662"
+       fx="33.866665"
+       fy="8.4666662"
+       r="33.866665"
+       gradientTransform="matrix(1,0,0,0.25,0,6.3499997)"
+       gradientUnits="userSpaceOnUse" />
+  </defs>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <rect
+       style="fill:url(#radialGradient1212);stroke-width:3.74177;stroke-linejoin:bevel;stroke-dasharray:7.48355, 7.48355;fill-opacity:1"
+       id="rect846"
+       width="67.73333"
+       height="16.933332"
+       x="-1.4210855e-14"
+       y="-3.5527137e-15"
+       ry="4.2525773" />
+    <rect
+       style="fill:#ffffff;stroke-width:3.56628;stroke-linejoin:bevel;stroke-dasharray:7.13256, 7.13256"
+       id="rect1186"
+       width="64.556549"
+       height="16.139137"
+       x="2.1175554"
+       y="0.58961672"
+       ry="4.0531263" />
+  </g>
+</svg>

@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://0k44vw4fnuj5"]
+
+[ext_resource type="Script" path="res://imports/Debug/scripts/inspectable.gd" id="1_smfi1"]
+[ext_resource type="PackedScene" uid="uid://by61jcqc1ussk" path="res://imports/Debug/scenes/ui_debug.tscn" id="2_1euwr"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dn1x3"]
+
+[node name="Inspectable" type="Node2D"]
+script = ExtResource("1_smfi1")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_dn1x3")
+
+[node name="UIDebug" parent="." instance=ExtResource("2_1euwr")]
+
+[connection signal="mouse_entered" from="Area2D" to="." method="_on_area_2d_mouse_entered"]
+[connection signal="mouse_exited" from="Area2D" to="." method="_on_area_2d_mouse_exited"]

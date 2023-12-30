@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   width="100"
+   height="100"
+   version="1.1"
+   id="svg1233"
+   sodipodi:docname="square_over_square.svg"
+   inkscape:version="1.1.1 (3bf5ae0d25, 2021-09-20)"
+   inkscape:export-filename="C:\Users\pittp\code\mbosetti\Ball Bouncer\assets\square_over_square.png"
+   inkscape:export-xdpi="100"
+   inkscape:export-ydpi="100"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview1235"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="true"
+     showgrid="false"
+     inkscape:zoom="4.8366667"
+     inkscape:cx="149.89662"
+     inkscape:cy="75.051688"
+     inkscape:window-width="2560"
+     inkscape:window-height="1346"
+     inkscape:window-x="-11"
+     inkscape:window-y="-11"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg1233" />
+  <defs
+     id="defs1227">
+    <pattern
+       inkscape:collect="always"
+       xlink:href="#p"
+       id="pattern1400"
+       patternTransform="translate(-100)" />
+    <pattern
+       id="p"
+       width="100"
+       height="100"
+       patternUnits="userSpaceOnUse">
+      <path
+         data-color="outline"
+         fill="none"
+         stroke="#FFFFFF"
+         stroke-width="5"
+         d="M33.5 100V66.5H0v-33h33.5V0h33v33.5H100v33H66.5V100z"
+         id="path1224" />
+    </pattern>
+  </defs>
+  <path
+     id="rect1231"
+     style="fill:url(#pattern1400)"
+     d="M 0,0 V 99.861328 H 100 V 0 Z M 0,149.86133 V 150 h 100 v -0.13867 z" />
+</svg>

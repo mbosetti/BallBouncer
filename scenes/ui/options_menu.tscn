@@ -1,0 +1,110 @@
+[gd_scene load_steps=8 format=3 uid="uid://dh3at4vtrevhg"]
+
+[ext_resource type="Script" path="res://scripts/ui/button/texture_button_with_label.gd" id="1_81220"]
+[ext_resource type="Texture2D" uid="uid://b44fog6w7k483" path="res://assets/ui/button/menu_button.svg" id="1_lxbct"]
+[ext_resource type="Texture2D" uid="uid://csjfmnq50snyv" path="res://assets/ui/button/menu_button_pressed.svg" id="2_w677l"]
+[ext_resource type="Shader" path="res://scenes/game_scene.gdshader" id="4_rc7ae"]
+[ext_resource type="Texture2D" uid="uid://cwd2homv46oqg" path="res://assets/square_over_square.png" id="5_gcsuf"]
+[ext_resource type="Texture2D" uid="uid://dl0cf5g3mbt01" path="res://assets/backgrounds/ball_bouncer.png" id="6_su31b"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_foigu"]
+shader = ExtResource("4_rc7ae")
+shader_parameter/scroll_speed = Vector2(-0.5, 0.25)
+shader_parameter/color = Vector4(1, 1, 1, 1)
+
+[node name="OptionsMenu" type="CanvasLayer"]
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 6
+size_flags_vertical = 6
+
+[node name="MarginContainer" type="MarginContainer" parent="Control"]
+layout_mode = 1
+offset_right = 929.0
+offset_bottom = 440.0
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+size_flags_stretch_ratio = 0.0
+
+[node name="BallBouncerText" type="TextureRect" parent="Control/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+texture = ExtResource("6_su31b")
+stretch_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="NewGameButton" type="TextureButton" parent="Control/MarginContainer/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+texture_normal = ExtResource("1_lxbct")
+texture_pressed = ExtResource("2_w677l")
+script = ExtResource("1_81220")
+
+[node name="Label" type="Label" parent="Control/MarginContainer/VBoxContainer/VBoxContainer/NewGameButton"]
+layout_mode = 0
+offset_right = 256.0
+offset_bottom = 64.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 32
+text = "New Game"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="OptionsButton" type="TextureButton" parent="Control/MarginContainer/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+texture_normal = ExtResource("1_lxbct")
+texture_pressed = ExtResource("2_w677l")
+script = ExtResource("1_81220")
+
+[node name="Label" type="Label" parent="Control/MarginContainer/VBoxContainer/VBoxContainer/OptionsButton"]
+layout_mode = 0
+offset_right = 256.0
+offset_bottom = 64.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 32
+text = "Optios"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ExitButton" type="TextureButton" parent="Control/MarginContainer/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+texture_normal = ExtResource("1_lxbct")
+texture_pressed = ExtResource("2_w677l")
+script = ExtResource("1_81220")
+
+[node name="Label" type="Label" parent="Control/MarginContainer/VBoxContainer/VBoxContainer/ExitButton"]
+layout_mode = 0
+offset_right = 256.0
+offset_bottom = 64.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 32
+text = "Exit
+"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="Control"]
+z_index = -1
+material = SubResource("ShaderMaterial_foigu")
+layout_mode = 2
+offset_right = 853.333
+offset_bottom = 1280.0
+mouse_filter = 2
+texture = ExtResource("5_gcsuf")
+stretch_mode = 1

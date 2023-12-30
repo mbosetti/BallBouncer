@@ -1,0 +1,21 @@
+[gd_scene load_steps=5 format=3 uid="uid://ds4qsa78i01ig"]
+
+[ext_resource type="PackedScene" uid="uid://dv0q7qrn7wn4s" path="res://scenes/types/collidable_object_base.tscn" id="1_civ03"]
+[ext_resource type="Texture2D" uid="uid://bqijb3ox2a4ae" path="res://assets/types/ball.svg" id="2_vdjnh"]
+[ext_resource type="Texture2D" uid="uid://d2g7wptuukvvh" path="res://assets/light_background.webp" id="3_ejk3q"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_lhak6"]
+radius = 26.0768
+
+[node name="CollidableObjectBase" instance=ExtResource("1_civ03")]
+
+[node name="Sprite" parent="." index="1"]
+texture = ExtResource("2_vdjnh")
+
+[node name="PointLight2D" type="PointLight2D" parent="Sprite" index="0"]
+z_index = 1
+scale = Vector2(0.730043, 0.730043)
+texture = ExtResource("3_ejk3q")
+
+[node name="CollisionShape2D" parent="." index="2"]
+shape = SubResource("CircleShape2D_lhak6")

@@ -1,0 +1,24 @@
+[gd_scene load_steps=2 format=3 uid="uid://by61jcqc1ussk"]
+
+[ext_resource type="Script" path="res://imports/Debug/scripts/ui_debug.gd" id="1_spjqy"]
+
+[node name="UIDebug" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_spjqy")
+
+[node name="DebugPanel" type="CanvasGroup" parent="."]
+
+[node name="Background" type="ColorRect" parent="DebugPanel"]
+offset_right = 487.0
+offset_bottom = 648.0
+color = Color(0, 0.168627, 0.231373, 0.388235)
+
+[node name="Text" type="RichTextLabel" parent="DebugPanel"]
+offset_right = 487.0
+offset_bottom = 648.0
+text = "UI DEBUG"

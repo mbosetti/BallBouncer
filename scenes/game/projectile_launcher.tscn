@@ -1,0 +1,31 @@
+[gd_scene load_steps=6 format=3 uid="uid://brphdiiw2w7qf"]
+
+[ext_resource type="Script" path="res://scripts/ProjectileLauncher.gd" id="1_qr75r"]
+[ext_resource type="Shader" path="res://scenes/projectile_launcher.gdshader" id="2_4i6lp"]
+[ext_resource type="Texture2D" uid="uid://dqd7vkip8g1vo" path="res://assets/dashed.svg" id="2_c7011"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_x0n4d"]
+shader = ExtResource("2_4i6lp")
+shader_parameter/scroll_speed = 0.75
+shader_parameter/color = Vector4(0.5, 1, 1, 1)
+
+[sub_resource type="Curve" id="Curve_lp87s"]
+_data = [Vector2(0.00336134, 1), 0.0, 0.0, 0, 0, Vector2(0.257143, 0.49426), 0.0, 0.0, 0, 0, Vector2(0.489076, 1), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[node name="ProjectileLauncher" type="Node2D"]
+script = ExtResource("1_qr75r")
+
+[node name="Marker2D" type="Marker2D" parent="."]
+gizmo_extents = 30.0
+
+[node name="Line2D" type="Line2D" parent="."]
+texture_repeat = 2
+material = SubResource("ShaderMaterial_x0n4d")
+closed = true
+width = 16.0
+width_curve = SubResource("Curve_lp87s")
+texture = ExtResource("2_c7011")
+texture_mode = 1
+joint_mode = 1
+antialiased = true

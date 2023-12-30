@@ -1,0 +1,28 @@
+[gd_scene load_steps=6 format=3 uid="uid://btjqiiwtaijyn"]
+
+[ext_resource type="Texture2D" uid="uid://bwrm1q2f7q7xo" path="res://assets/types/square.svg" id="1_j8y3r"]
+[ext_resource type="Shader" path="res://scenes/game_scene.gdshader" id="1_mootl"]
+[ext_resource type="PackedScene" uid="uid://mgqe4bqah1dj" path="res://scenes/square.tscn" id="3_lepyo"]
+[ext_resource type="PackedScene" uid="uid://dtim13wlan628" path="res://scenes/projectil.tscn" id="4_d57o6"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_k4pnw"]
+shader = ExtResource("1_mootl")
+
+[node name="GameScene" type="Node2D"]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(0.176471, 0.176471, 0.176471, 1)
+material = SubResource("ShaderMaterial_k4pnw")
+scale = Vector2(3.21875, 5.04688)
+texture = ExtResource("1_j8y3r")
+
+[node name="Objects" type="Node2D" parent="."]
+
+[node name="Square" parent="Objects" instance=ExtResource("3_lepyo")]
+position = Vector2(0, 236)
+health = null
+bounciness = null
+
+[node name="Projectile" parent="." instance=ExtResource("4_d57o6")]

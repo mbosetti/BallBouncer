@@ -1,0 +1,71 @@
+[gd_scene load_steps=5 format=3 uid="uid://dv0q7qrn7wn4s"]
+
+[ext_resource type="Script" path="res://scripts/CollidableObject.gd" id="1_jjdsb"]
+[ext_resource type="Texture2D" uid="uid://bui5c8o3fdgah" path="res://assets/types/triangle.svg" id="2_x2gv8"]
+[ext_resource type="PackedScene" uid="uid://chx5j14qplkjb" path="res://scenes/util/shake.tscn" id="3_sbfgl"]
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_i6yf2"]
+particle_flag_disable_z = true
+emission_shape = 1
+emission_sphere_radius = 25.17
+spread = 180.0
+gravity = Vector3(0, 0, 0)
+radial_accel_min = 46.67
+radial_accel_max = 46.67
+tangential_accel_min = 42.2
+tangential_accel_max = 52.0
+scale_max = 3.2
+turbulence_enabled = true
+
+[node name="CollidableObjectBase" type="RigidBody2D"]
+collision_layer = 4
+collision_mask = 11
+gravity_scale = 0.0
+freeze = true
+freeze_mode = 1
+max_contacts_reported = 4
+contact_monitor = true
+script = ExtResource("1_jjdsb")
+base_color = Color(0.709804, 0, 0, 1)
+death_sound = "res://assets/sfx/pop.mp3"
+
+[node name="Particles" type="GPUParticles2D" parent="."]
+visible = false
+emitting = false
+amount = 20
+process_material = SubResource("ParticleProcessMaterial_i6yf2")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("2_x2gv8")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+
+[node name="Label" type="RichTextLabel" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -64.0
+offset_top = -21.0
+offset_right = 64.0
+offset_bottom = 21.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.764706)
+theme_override_constants/shadow_offset_x = -1
+theme_override_constants/shadow_offset_y = 1
+theme_override_constants/shadow_outline_size = 6
+theme_override_font_sizes/normal_font_size = 30
+bbcode_enabled = true
+text = "[center]105[/center]"
+fit_content = true
+scroll_active = false
+deselect_on_focus_loss_enabled = false
+drag_and_drop_selection_enabled = false
+
+[node name="Shake" parent="." node_paths=PackedStringArray("target") instance=ExtResource("3_sbfgl")]
+target = NodePath("../Sprite")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
