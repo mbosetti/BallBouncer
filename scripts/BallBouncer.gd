@@ -23,6 +23,7 @@ var round_projectile_count = 0
 var round = 0
 var _has_shot = false
 var _is_game_over = false
+var cursor_event_position = Vector2.ZERO
 
 func _ready():
 	deadZone.body_entered.connect(_on_projectile_enter_dead_zone)
@@ -58,10 +59,6 @@ func save_game():
 	}
 	save_file.store_line(JSON.stringify(save_data))
 
-func _process(delta):
-	if Input.is_action_just_released("click"):
-		_launch_projectiles()
-
 func get_launcher_target_position():
 	return get_global_mouse_position()
 
@@ -79,8 +76,6 @@ func _on_projectile_enter_dead_zone(body):
 		projectile.gravity_scale = 0
 		projectile.linear_velocity = Vector2.ZERO
 		projectile.visible = false
-		# projectile.hit.disconnect(_on_projectile_hit)
-		# projectile.queue_free()
 		_on_projectile_deleted()
 
 func _on_player_dead_zone_body_entered(body):
@@ -101,12 +96,16 @@ func _on_projectile_hit():
 
 func _on_projectile_deleted():
 	round_projectile_count -= 1
-	# if round_projectile_count == 0:
-	# 	_start_round()
 
 func _game_over():
 	print('game over')
 	_reset()
+
+func show_line():
+	projectileLauncher.show_line()
+
+func hide_line():
+	projectileLauncher.hide_line()
 
 func _spawn_collidable_objects(health: int):
 	var spawned = collidableObjectSpawner.spawn(health)
