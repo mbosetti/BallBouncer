@@ -10,5 +10,4 @@ func _start_round():
 	game.round += 1
 	game._has_shot = false
 	game.ui.set_balls_left(game.projectiles_count)
-	print("about to change state to round")
 	transition_deferred("round")
