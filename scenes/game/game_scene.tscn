@@ -231,6 +231,7 @@ logging = true
 
 [node name="Round_Start" type="Node" parent="State Machine"]
 script = ExtResource("18_n7oe4")
+health_muliplier = 1.58
 
 [node name="Round" type="Node" parent="State Machine"]
 script = ExtResource("19_vlimi")
