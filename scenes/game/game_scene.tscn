@@ -148,13 +148,13 @@ texture_mode = 1
 [node name="ProjectileLauncher" parent="." instance=ExtResource("7_35dpy")]
 position = Vector2(0, -619)
 launch_speed = 1000.0
-launch_delay = null
 launch_sound = "res://assets/sfx/launch.mp3"
 
 [node name="CollidableObjectSpawner" type="Node2D" parent="." node_paths=PackedStringArray("spawn_parent")]
 script = ExtResource("8_lmsiy")
 spawn_count_min = 2
 spawn_count_max = 5
+spawn_location_prefix = null
 spawnable_objects = Array[PackedScene]([ExtResource("9_flstf"), ExtResource("10_gfmyq"), ExtResource("11_4gxdp")])
 spawn_parent = NodePath("../Objects")
 
@@ -231,7 +231,7 @@ logging = true
 
 [node name="Round_Start" type="Node" parent="State Machine"]
 script = ExtResource("18_n7oe4")
-health_muliplier = 1.58
+health_muliplier_max = 2.5
 
 [node name="Round" type="Node" parent="State Machine"]
 script = ExtResource("19_vlimi")

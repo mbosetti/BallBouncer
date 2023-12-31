@@ -42,7 +42,8 @@ func _on_body_entered(body):
 		return
 
 	emit_signal("hit")
-	AudioManager.play(collidable_object_sound)
+	
+	AudioManager.play(AudioManager.Params.new(collidable_object_sound, 0.05, 1))
 		
 	if _last_collided == null:
 		reset()

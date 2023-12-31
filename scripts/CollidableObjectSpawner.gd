@@ -17,7 +17,7 @@ func _ready():
 		if child.name.begins_with(spawn_location_prefix):
 			_spawn_locations.append(child)
 			
-func spawn(health: int = 1) -> Array:
+func spawn(min: int = 1, max: int = 1) -> Array:
 	var randomSpawnLocations = _spawn_locations.duplicate()
 	randomSpawnLocations.shuffle()
 	var spawn_count = randi() % (spawn_count_max - spawn_count_min + 1) + spawn_count_min
@@ -26,7 +26,7 @@ func spawn(health: int = 1) -> Array:
 		var spawn_location = randomSpawnLocations[i]
 		var spawn_scene = spawnable_objects[randi() % spawnable_objects.size()]
 		var spawn = spawn_scene.instantiate() as CollidableObject
-		spawn.health = health
+		spawn.health = randi_range(min, max)
 		spawn_parent.add_child(spawn)
 		spawn.position = spawn_location.position
 		spawn.random_rotation()

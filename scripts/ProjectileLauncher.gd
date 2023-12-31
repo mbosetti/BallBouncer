@@ -26,6 +26,11 @@ var _projectiles: Array[Projectile] = []
 var projectile_scene = preload("res://scenes/game/projectile.tscn")
 var _show_line: bool = false
 
+var _launch_params: AudioManager.Params
+
+func _ready() -> void:
+	_launch_params = AudioManager.Params.new(launch_sound, 0.2, 1)
+
 func _process(delta: float) -> void:
 	if _show_line:
 		# TODO: Not hardcoded
@@ -50,11 +55,11 @@ func launch_multiple(params: Params) -> Array[Projectile]:
 		# Create a new projectile if needed
 		if _projectiles.size() == 0:
 			projectile = _create_projectile()
+			params.parent.add_child(projectile)
 			_projectiles.append(projectile)
 
 		projectile = _projectiles.pop_front()
 		projectiles.append(projectile)
-		params.parent.add_child(projectile)
 		
 		# Launch the projectile
 		projectile.global_position = self.global_position
@@ -66,7 +71,7 @@ func launch_multiple(params: Params) -> Array[Projectile]:
 			projectile.connect("hit", params.hit_callback)
 
 		emit_signal("projectile_launched", projectile)
-		AudioManager.play(launch_sound)
+		AudioManager.play(_launch_params)
 		await get_tree().create_timer(launch_delay).timeout
 	return projectiles
 

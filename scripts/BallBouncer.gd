@@ -32,12 +32,20 @@ func _ready():
 	emit_signal("has_loaded")
 	# _reset()
 
+func set_score(score: int):
+	self.score = score
+	ui.set_score(score)
+	gameOverScreen.set_score(score)
+	if score > high_score:
+		high_score = score
+		ui.set_high_score(high_score)
+		gameOverScreen.set_score(high_score)
+
 func _reset():
-	score = 0
 	_is_game_over = false
 	projectiles_count = projectile_count
 	round = starting_round
-	ui.set_score(score)
+	set_score(0)
 	for child in object_container.get_children():
 		if child is CollidableObject or child is Projectile:
 			object_container.remove_child(child)
@@ -108,8 +116,8 @@ func show_line():
 func hide_line():
 	projectileLauncher.hide_line()
 
-func _spawn_collidable_objects(health: int):
-	var spawned = collidableObjectSpawner.spawn(health)
+func _spawn_collidable_objects(min: int, max: int):
+	var spawned = collidableObjectSpawner.spawn(min, max)
 	for co in spawned:
 		co.death.connect(_on_collidable_object_destroyed)
 

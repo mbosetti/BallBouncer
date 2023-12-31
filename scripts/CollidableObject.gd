@@ -45,7 +45,7 @@ func _do_particles():
 	particles.emitting = false
 		
 func _do_death():
-	AudioManager.play(death_sound)
+	AudioManager.play(AudioManager.Params.new(death_sound))
 	emit_signal("death", self)
 	queue_free()
 
