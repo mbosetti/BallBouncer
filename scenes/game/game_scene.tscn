@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://btjqiiwtaijyn"]
+[gd_scene load_steps=32 format=3 uid="uid://btjqiiwtaijyn"]
 
 [ext_resource type="Script" path="res://scripts/BallBouncer.gd" id="1_642hy"]
 [ext_resource type="PackedScene" uid="uid://chg3qjhehf1ar" path="res://scenes/ui/main_ui.tscn" id="2_4gw5c"]
@@ -34,6 +34,9 @@ size = Vector2(20, 790)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_q0fbp"]
 size = Vector2(432, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_i7ekx"]
+size = Vector2(20, 258)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ome2t"]
 size = Vector2(414, 20)
@@ -120,7 +123,9 @@ position = Vector2(0, 670)
 scale = Vector2(1.96, 5)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="World/DeadZone"]
-shape = SubResource("RectangleShape2D_ome2t")
+position = Vector2(0, -138)
+scale = Vector2(20.4694, 1)
+shape = SubResource("RectangleShape2D_i7ekx")
 
 [node name="PlayerDeadZone" type="Area2D" parent="World"]
 position = Vector2(-1, -479)

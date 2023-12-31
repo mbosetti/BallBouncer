@@ -26,7 +26,7 @@ var _is_game_over = false
 var cursor_event_position = Vector2.ZERO
 
 func _ready():
-	deadZone.body_entered.connect(_on_projectile_enter_dead_zone)
+	deadZone.body_exited.connect(_on_projectile_exited_dead_zone)
 	projectileLauncher.projectile_launched.connect(on_projectile_launched)
 	load_game()
 	emit_signal("has_loaded")
@@ -70,7 +70,7 @@ func _launch_projectiles():
 		var mouse_pos = get_launcher_target_position()
 		var projectiles = await projectileLauncher.launch_multiple(ProjectileLauncher.Params.new(mouse_pos, object_container, projectiles_count, _on_projectile_hit))
 		
-func _on_projectile_enter_dead_zone(body):
+func _on_projectile_exited_dead_zone(body):
 	var projectile = body as Projectile
 	if projectile:
 		projectile.gravity_scale = 0
