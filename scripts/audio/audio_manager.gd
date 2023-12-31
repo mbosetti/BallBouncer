@@ -4,11 +4,13 @@ class Params:
 	var sound_path: String
 	var expiration: float
 	var priority: int
+	var pitch: float = 1.0
 
-	func _init(sound_path: String, expiration: float = INF, priority: int = 100):
+	func _init(sound_path: String, expiration: float = INF, priority: int = 100, pitch: float = 1.0):
 		self.sound_path = sound_path
 		self.expiration = expiration
 		self.priority = priority
+		self.pitch = pitch
 
 @export var num_players: int = 8
 @export var bus: String = "master"
@@ -48,4 +50,5 @@ func _process(delta):
 		var param = queue.pop_front()
 		_available[0].stream = load(param.sound_path)
 		_available[0].play()
+		_available[0].pitch_scale = param.pitch
 		_available.pop_front()

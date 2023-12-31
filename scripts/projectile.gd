@@ -8,6 +8,8 @@ extends RigidBody2D
 @export var bounce_away_force: float = 100.0
 @export var bounce_away_range_x: float = 15.0
 @export var collidable_object_sound: String = "bounce"
+@export var collidable_object_sound_pitch_min = 0.9
+@export var collidable_object_sound_pitch_max = 1.1
 
 var _last_collided: CollidableObject = null
 var _last_collided_count: int = 0
@@ -43,7 +45,7 @@ func _on_body_entered(body):
 
 	emit_signal("hit")
 	
-	AudioManager.play(AudioManager.Params.new(collidable_object_sound, 0.05, 1))
+	AudioManager.play(AudioManager.Params.new(collidable_object_sound, 0.05, 100, randf_range(collidable_object_sound_pitch_min, collidable_object_sound_pitch_max)))
 		
 	if _last_collided == null:
 		reset()

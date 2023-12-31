@@ -6,6 +6,8 @@ extends RigidBody2D
 @export var bounciness: float = 1.0
 @export var particle_play_duration: float = 0.25
 @export var death_sound: String = "pop"
+@export var death_pitch_min: float = 0.75
+@export var death_pitch_max: float = 1.25
 
 @onready var particles: GPUParticles2D = $Particles
 @onready var HealthLabel: RichTextLabel = $Label
@@ -45,7 +47,7 @@ func _do_particles():
 	particles.emitting = false
 		
 func _do_death():
-	AudioManager.play(AudioManager.Params.new(death_sound))
+	AudioManager.play(AudioManager.Params.new(death_sound, 0.5, 1, randf_range(death_pitch_min, death_pitch_max)))
 	emit_signal("death", self)
 	queue_free()
 
