@@ -148,6 +148,7 @@ texture_mode = 1
 [node name="ProjectileLauncher" parent="." instance=ExtResource("7_35dpy")]
 position = Vector2(0, -619)
 launch_speed = 1000.0
+launch_delay = null
 launch_sound = "res://assets/sfx/launch.mp3"
 
 [node name="CollidableObjectSpawner" type="Node2D" parent="." node_paths=PackedStringArray("spawn_parent")]

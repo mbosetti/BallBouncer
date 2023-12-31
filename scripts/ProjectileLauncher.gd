@@ -33,6 +33,10 @@ func _process(delta: float) -> void:
 	else:
 		line.points = []
 
+func recycle(projectile: Projectile) -> void:
+	projectile.visible = false
+	_projectiles.push_back(projectile)
+
 func show_line() -> void:
 	_show_line = true
 
@@ -44,12 +48,11 @@ func launch_multiple(params: Params) -> Array[Projectile]:
 	var projectile
 	for i in range(params.count):
 		# Create a new projectile if needed
-		if i >= projectiles.size():
+		if _projectiles.size() == 0:
 			projectile = _create_projectile()
 			_projectiles.append(projectile)
 
-		# Reuse an existing projectile
-		projectile = _projectiles[i]
+		projectile = _projectiles.pop_front()
 		projectiles.append(projectile)
 		params.parent.add_child(projectile)
 		

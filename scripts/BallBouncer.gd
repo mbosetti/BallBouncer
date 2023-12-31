@@ -76,6 +76,7 @@ func _on_projectile_exited_dead_zone(body):
 		projectile.gravity_scale = 0
 		projectile.linear_velocity = Vector2.ZERO
 		projectile.visible = false
+		projectileLauncher.recycle(projectile)
 		_on_projectile_deleted()
 
 func _on_player_dead_zone_body_entered(body):
