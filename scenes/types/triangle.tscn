@@ -15,9 +15,3 @@ texture = ExtResource("2_0gaxc")
 
 [node name="CollisionShape2D" parent="." index="2"]
 shape = SubResource("ConvexPolygonShape2D_26pun")
-
-[node name="Label" parent="." index="3"]
-offset_left = -63.0
-offset_top = -8.0
-offset_right = 65.0
-offset_bottom = 34.0

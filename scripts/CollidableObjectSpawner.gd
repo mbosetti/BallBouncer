@@ -27,8 +27,8 @@ func spawn(min: int = 1, max: int = 1) -> Array:
 		var spawn_scene = spawnable_objects[randi() % spawnable_objects.size()]
 		var spawn = spawn_scene.instantiate() as CollidableObject
 		spawn.health = randi_range(min, max)
-		spawn_parent.add_child(spawn)
 		spawn.position = spawn_location.position
+		spawn_parent.add_child(spawn)
 		spawn.random_rotation()
 		spawned.append(spawn)
 	return spawned

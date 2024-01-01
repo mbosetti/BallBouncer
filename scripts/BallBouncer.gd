@@ -25,6 +25,8 @@ var _has_shot = false
 var _is_game_over = false
 var cursor_event_position = Vector2.ZERO
 
+const SAVE_FILE_PATH = "user://save_game.save"
+
 func _ready():
 	deadZone.body_exited.connect(_on_projectile_exited_dead_zone)
 	projectileLauncher.projectile_launched.connect(on_projectile_launched)
@@ -52,14 +54,14 @@ func _reset():
 			child.queue_free()
 
 func load_game():
-	var save_file = FileAccess.open("user://save_game.save", FileAccess.READ)
+	var save_file = FileAccess.open(SAVE_FILE_PATH, FileAccess.READ)
 	if save_file:
 		var save_data = JSON.parse_string(save_file.get_as_text())
 		high_score = save_data["high_score"]
 	gameOverScreen.set_high_score(high_score)
 
 func save_game():
-	var save_file = FileAccess.open("user://save_game.save", FileAccess.WRITE)
+	var save_file = FileAccess.open(SAVE_FILE_PATH, FileAccess.WRITE)
 	if score > high_score:
 		high_score = score
 	var save_data = {
