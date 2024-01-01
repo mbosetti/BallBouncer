@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=3 uid="uid://btjqiiwtaijyn"]
+[gd_scene load_steps=36 format=3 uid="uid://btjqiiwtaijyn"]
 
 [ext_resource type="Script" path="res://scripts/BallBouncer.gd" id="1_642hy"]
 [ext_resource type="PackedScene" uid="uid://chg3qjhehf1ar" path="res://scenes/ui/main_ui.tscn" id="2_4gw5c"]
@@ -17,6 +17,7 @@
 [ext_resource type="PackedScene" uid="uid://snawpiwia6ch" path="res://scenes/types/square.tscn" id="10_gfmyq"]
 [ext_resource type="PackedScene" uid="uid://dh1uukhd20wso" path="res://scenes/types/triangle.tscn" id="11_4gxdp"]
 [ext_resource type="AudioStream" uid="uid://c1pcvjhb0ddm" path="res://assets/music/background_music.mp3" id="12_82ob4"]
+[ext_resource type="Resource" uid="uid://b1fijggv1fyrt" path="res://resources/audio/projectile_launch.tres" id="13_2dx7l"]
 [ext_resource type="Texture2D" uid="uid://3x7osmtyh73d" path="res://assets/bottom_wave.svg" id="14_em56t"]
 [ext_resource type="Script" path="res://scripts/state/state_machine.gd" id="16_qbstw"]
 [ext_resource type="Script" path="res://scripts/state/game/round_start_state.gd" id="18_n7oe4"]
@@ -68,6 +69,10 @@ shader_parameter/color = Vector4(0, 0, 0, 0.415)
 
 [node name="GameScene" type="Node2D" groups=["Game"]]
 script = ExtResource("1_642hy")
+object_move_distance = null
+object_move_duration = null
+projectile_count = null
+starting_round = null
 
 [node name="UI" parent="." instance=ExtResource("2_4gw5c")]
 
@@ -161,7 +166,7 @@ texture_mode = 1
 [node name="ProjectileLauncher" parent="." instance=ExtResource("7_35dpy")]
 position = Vector2(0, -619)
 launch_speed = 1000.0
-launch_sound = "res://assets/sfx/launch.mp3"
+projectile_audio_config = ExtResource("13_2dx7l")
 
 [node name="CollidableObjectSpawner" type="Node2D" parent="." node_paths=PackedStringArray("spawn_parent")]
 script = ExtResource("8_lmsiy")

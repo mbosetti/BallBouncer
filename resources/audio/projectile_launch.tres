@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="AudioClipParams" load_steps=2 format=3 uid="uid://b1fijggv1fyrt"]
+
+[ext_resource type="Script" path="res://scripts/audio/audio_clip_params.gd" id="1_fym8d"]
+
+[resource]
+script = ExtResource("1_fym8d")
+sound_path = "res://assets/sfx/launch.mp3"
+expiration = -1.0
+priority = 1
+pitch = 1.0
+pitch_min = 1.0
+pitch_max = 1.0

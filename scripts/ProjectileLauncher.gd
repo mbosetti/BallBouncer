@@ -16,8 +16,7 @@ class Params:
 
 @export var launch_speed: float = 100
 @export var launch_delay: float = 0.25
-@export var launch_sound: String = "launch"
-
+@export var projectile_audio_config: AudioClipParams
 @onready var line: Line2D = $Line2D
 
 signal projectile_launched(projectile: Projectile)
@@ -25,11 +24,6 @@ signal projectile_launched(projectile: Projectile)
 var _projectiles: Array[Projectile] = []
 var projectile_scene = preload("res://scenes/game/projectile.tscn")
 var _show_line: bool = false
-
-var _launch_params: AudioManager.Params
-
-func _ready() -> void:
-	_launch_params = AudioManager.Params.new(launch_sound, 0.2, 1)
 
 func _process(delta: float) -> void:
 	if _show_line:
@@ -71,7 +65,9 @@ func launch_multiple(params: Params) -> Array[Projectile]:
 			projectile.connect("hit", params.hit_callback)
 
 		emit_signal("projectile_launched", projectile)
-		AudioManager.play(_launch_params)
+		var audioInstanceConfig = projectile_audio_config.duplicate()
+		audioInstanceConfig.pitch = 1.0
+		AudioManager.play(audioInstanceConfig)
 		await get_tree().create_timer(launch_delay).timeout
 	return projectiles
 

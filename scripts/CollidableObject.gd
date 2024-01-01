@@ -5,9 +5,7 @@ extends RigidBody2D
 @export var health: int = 100
 @export var bounciness: float = 1.0
 @export var particle_play_duration: float = 0.25
-@export var death_sound: String = "pop"
-@export var death_pitch_min: float = 0.75
-@export var death_pitch_max: float = 1.25
+@export var death_audio_config: AudioClipParams
 
 @onready var particles: GPUParticles2D = $Particles
 @onready var HealthLabel: RichTextLabel = $Label
@@ -20,6 +18,9 @@ signal death(collidable_object: CollidableObject)
 func _ready():
 	sprite.modulate = base_color
 	_update_health()
+	await get_tree().create_timer(0.01).timeout
+	if $Sprite/PointLight2D:
+		$Sprite/PointLight2D.visible = true
 
 func _update_sprite_color():
 	var hue = health / 100.0
@@ -47,7 +48,7 @@ func _do_particles():
 	particles.emitting = false
 		
 func _do_death():
-	AudioManager.play(AudioManager.Params.new(death_sound, 0.5, 1, randf_range(death_pitch_min, death_pitch_max)))
+	AudioManager.play(death_audio_config.duplicate_random_pitch())
 	emit_signal("death", self)
 	queue_free()
 

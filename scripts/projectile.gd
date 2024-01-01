@@ -7,9 +7,7 @@ extends RigidBody2D
 @export var max_velocity: float = 1000.0
 @export var bounce_away_force: float = 100.0
 @export var bounce_away_range_x: float = 15.0
-@export var collidable_object_sound: String = "bounce"
-@export var collidable_object_sound_pitch_min = 0.9
-@export var collidable_object_sound_pitch_max = 1.1
+@export var collision_audio_config: AudioClipParams
 
 var _last_collided: CollidableObject = null
 var _last_collided_count: int = 0
@@ -19,7 +17,7 @@ signal hit
 
 func _ready():
 	_gravity_scale = gravity_scale
-	gravity_scale = 0
+	reset()
 
 func bounce_away():
 	# Apply an impulse at the body's center
@@ -33,6 +31,11 @@ func _physics_process(delta):
 		linear_velocity = linear_velocity.normalized() * max_velocity
 
 func reset():
+	visible = false
+	gravity_scale = 0
+	_reset_body_count()
+
+func _reset_body_count():
 	_last_collided = null
 	_last_collided_count = 0
 			
@@ -40,15 +43,14 @@ func _on_body_entered(body):
 	gravity_scale = _gravity_scale
 	var co = body as CollidableObject
 	if co == null:
-		reset()
+		_reset_body_count()
 		return
 
 	emit_signal("hit")
-	
-	AudioManager.play(AudioManager.Params.new(collidable_object_sound, 0.05, 100, randf_range(collidable_object_sound_pitch_min, collidable_object_sound_pitch_max)))
+	AudioManager.play(collision_audio_config.duplicate_random_pitch())
 		
 	if _last_collided == null:
-		reset()
+		_reset_body_count()
 		_last_collided = co
 		return
 
@@ -56,4 +58,4 @@ func _on_body_entered(body):
 		_last_collided_count += 1
 		if _last_collided_count >= bounce_away_count:
 			bounce_away()
-			reset()
+			_reset_body_count()

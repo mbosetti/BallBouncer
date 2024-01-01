@@ -1,6 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://dtim13wlan628"]
+[gd_scene load_steps=7 format=3 uid="uid://dtim13wlan628"]
 
 [ext_resource type="Script" path="res://scripts/projectile.gd" id="1_uuwch"]
+[ext_resource type="Resource" uid="uid://bl5q2ofojkouh" path="res://resources/audio/projectile_collide.tres" id="2_45imb"]
 [ext_resource type="Texture2D" uid="uid://bqijb3ox2a4ae" path="res://assets/types/ball.svg" id="2_svg3v"]
 [ext_resource type="Texture2D" uid="uid://d2g7wptuukvvh" path="res://assets/light_background.webp" id="3_oyxsm"]
 
@@ -19,7 +20,7 @@ max_contacts_reported = 4
 contact_monitor = true
 script = ExtResource("1_uuwch")
 bounce_away_range_x = 60.0
-collidable_object_sound = "res://assets/sfx/click.mp3"
+collision_audio_config = ExtResource("2_45imb")
 
 [node name="Sprite" type="Sprite2D" parent="."]
 scale = Vector2(0.25, 0.25)

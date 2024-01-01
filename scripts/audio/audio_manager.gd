@@ -1,17 +1,5 @@
 extends Node
 
-class Params:
-	var sound_path: String
-	var expiration: float
-	var priority: int
-	var pitch: float = 1.0
-
-	func _init(sound_path: String, expiration: float = INF, priority: int = 100, pitch: float = 1.0):
-		self.sound_path = sound_path
-		self.expiration = expiration
-		self.priority = priority
-		self.pitch = pitch
-
 @export var num_players: int = 8
 @export var bus: String = "master"
 
@@ -29,7 +17,7 @@ func _ready():
 func _on_stream_finished(stream):
 	_available.append(stream)
 
-func play(params: Params):
+func play(params: AudioClipParams):
 	queue.append(params)
 	_sort_queue()
 
@@ -40,9 +28,14 @@ func _sort_queue():
 	queue.sort_custom(_sort_priority)
 
 func _filter_expired(delta: float):
-	for i in queue.size():
-		if queue[i].expiration != null && queue[i].expiration <= 0.0:
-			queue.remove(i)
+	var i = queue.size()
+	while i > 0:
+		i -= 1
+		if queue[i].expiration != -1:
+			queue[i].expiration -= delta
+			if queue[i].expiration <= 0.0:
+				print("removing ", queue[i].sound_path)
+				queue.remove_at(i)
 
 func _process(delta):
 	_filter_expired(delta)

@@ -1,6 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://dv0q7qrn7wn4s"]
+[gd_scene load_steps=6 format=3 uid="uid://dv0q7qrn7wn4s"]
 
 [ext_resource type="Script" path="res://scripts/CollidableObject.gd" id="1_jjdsb"]
+[ext_resource type="Resource" uid="uid://c8xeu0lt8yq3m" path="res://resources/audio/collidable_object_death.tres" id="2_5rqt6"]
 [ext_resource type="Texture2D" uid="uid://bui5c8o3fdgah" path="res://assets/types/triangle.svg" id="2_x2gv8"]
 [ext_resource type="PackedScene" uid="uid://chx5j14qplkjb" path="res://scenes/util/shake.tscn" id="3_sbfgl"]
 
@@ -27,7 +28,7 @@ max_contacts_reported = 4
 contact_monitor = true
 script = ExtResource("1_jjdsb")
 base_color = Color(0.709804, 0, 0, 1)
-death_sound = "res://assets/sfx/pop.mp3"
+death_audio_config = ExtResource("2_5rqt6")
 
 [node name="Particles" type="GPUParticles2D" parent="."]
 visible = false

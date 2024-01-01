@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="AudioClipParams" load_steps=2 format=3 uid="uid://c8xeu0lt8yq3m"]
+
+[ext_resource type="Script" path="res://scripts/audio/audio_clip_params.gd" id="1_fbh3x"]
+
+[resource]
+script = ExtResource("1_fbh3x")
+sound_path = "res://assets/sfx/pop.mp3"
+expiration = -1.0
+priority = 1
+pitch = 1.0
+pitch_min = 0.75
+pitch_max = 1.25
