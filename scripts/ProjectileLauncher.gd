@@ -56,6 +56,7 @@ func launch_multiple(params: Params) -> Array[Projectile]:
 		projectiles.append(projectile)
 		
 		# Launch the projectile
+		projectile.linear_velocity = Vector2.ZERO
 		projectile.global_position = self.global_position
 		projectile.linear_velocity = Vector2(params.mouse_pos - self.global_position).normalized() * launch_speed
 		projectile.gravity_scale = 0
